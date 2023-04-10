@@ -63,9 +63,11 @@ header button {
 	margin-left: 10px;
 	width: 80px;
 	height: 30px;
-	font-size: small;
+	font-size: 8px;
 	font-weight: bold;
+	border-radius: 4px;
 }
+
 .todo__list__items {
 	width: 55vw;
 	height: 80vh;
@@ -78,10 +80,59 @@ header button {
 
 .todo__list__item {
 	width: 80%;
-	height: 30px;
+	height: 100px;
 	margin: 10px;
 	border: var(--border-color) 1px solid;
+
+	display: flex;
+	align-items: center;
 }
 
-.Image {
+.item_content {
+	width: 90%;
+	height: 100%;
+}
+
+.Image .item_content,
+.Video .item_content {
+	display: flex;
+	align-items: center;
+}
+
+.Image .content,
+.Video .content {
+	width: 70%;
+	height: 100%;
+}
+
+.title {
+	color: var(--text-accent-color);
+}
+
+.Note .content,
+.Memo .content {
+	color: var(--smokywhite);
+	height: 80%;
+}
+
+.Image .title,
+.Video .title {
+	width: 30%;
+}
+
+.todo__list__item img,
+.todo__list__item video {
+	width: 100%;
+	height: 100%;
+}
+
+.todo__list__item .delete_button {
+	color: var(--accent-color);
+	width: 10%;
+}
+
+.Note .title,
+.Memo .title {
+	padding: 10px 0;
+	height: 30%;
 }
