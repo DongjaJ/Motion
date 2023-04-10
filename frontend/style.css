@@ -136,3 +136,23 @@ header button {
 	padding: 10px 0;
 	height: 30%;
 }
+
+.modal {
+	background-color: var(--bg-accent-color);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	border-radius: var(--border-color) 1px solid;
+	color: var(--text-accent-color);
+}
+
+.modal .cancel_btn {
+	text-align: end;
+	color: var(--accent-color);
+}
+
+.modal button {
+	background-color: var(--accent-color);
+	color: var(--smokywhite);
+}
