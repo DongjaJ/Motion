@@ -47,18 +47,18 @@ h3 {
 	border: var(--border-color) 1px solid;
 }
 
-header {
+.todo__list header {
 	width: 55vw;
 	height: 20vh;
 	background-color: var(--black);
 }
 
-header h1 {
+.todo__list header h1 {
 	color: var(--accent-color);
 	margin: 8px 0;
 }
 
-header button {
+.todo__list header button {
 	background-color: var(--accent-color);
 	color: var(--smokywhite);
 	margin-left: 10px;
@@ -147,8 +147,8 @@ header button {
 	height: 100%;
 
 	background-color: var(--translucent-black);
-	opacity: 0;
-	visibility: hidden;
+	/* opacity: 0;
+	visibility: hidden; */
 }
 
 .modal.active_modal {
@@ -185,10 +185,16 @@ header button {
 	border: var(--border-color) 1px solid;
 }
 
+.modal header {
+	display: flex;
+	justify-content: end;
+}
+
 .modal .cancel_btn {
-	text-align: end;
-	padding: 8px 8px 0 0;
+	width: 32px;
+	padding-top: 8px;
 	color: var(--accent-color);
+	cursor: pointer;
 }
 
 .modal .Title,
