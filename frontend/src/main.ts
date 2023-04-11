@@ -1,8 +1,10 @@
+import ModalImpl from './Modal.js';
 interface TodoList {
 	setEvent(): void;
 }
+
 class TodoListImpl implements TodoList {
-	constructor(private $target: HTMLElement) {
+	constructor(private $target: HTMLElement, private modal: ModalImpl) {
 		this.setEvent();
 	}
 
@@ -11,20 +13,14 @@ class TodoListImpl implements TodoList {
 		this.$target.addEventListener('click', (e) => {
 			const target = e.target;
 			if (!(target instanceof HTMLButtonElement)) return;
-			const modal = document.body.querySelector('.modal');
-			modal?.classList.toggle('active_modal');
-		});
-		//모달 창에서 취소버튼이나 더하기버튼 누르면 모달창 닫기
-		const modal = document.body.querySelector('.modal');
-		modal?.addEventListener('click', (e) => {
-			const $target = e.target as HTMLElement;
-			const cancelButton = $target?.closest('.cancel-modal-btn');
-			const addButton = $target.closest('.add-item-btn');
-			if (cancelButton || addButton)
-				modal.classList.toggle('active_modal');
+			const contentType = target.id;
+			this.modal.setContentType(contentType);
+			this.modal.toggleModal();
 		});
 	}
 }
 
+const modalTarget = document.querySelector('.modal') as HTMLElement;
+const modal = new ModalImpl(modalTarget);
 const todolist = document.querySelector('.todo__list') as HTMLElement;
-new TodoListImpl(todolist);
+new TodoListImpl(todolist, modal);
