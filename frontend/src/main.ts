@@ -15,12 +15,14 @@ class TodoListImpl implements TodoList {
 			modal?.classList.toggle('active_modal');
 		});
 		//모달 창에서 취소버튼이나 더하기버튼 누르면 모달창 닫기
-		// const modal = document.body.querySelector('.modal');
-		// modal?.addEventListener('click', (e) => {
-		// 	const $target = e.target as HTMLElement;
-		// 	const cancelButton = $target?.closest('.cancel_btn');
-		// 	const addButton = $target.closest('button');
-		// });
+		const modal = document.body.querySelector('.modal');
+		modal?.addEventListener('click', (e) => {
+			const $target = e.target as HTMLElement;
+			const cancelButton = $target?.closest('.cancel-modal-btn');
+			const addButton = $target.closest('.add-item-btn');
+			if (cancelButton || addButton)
+				modal.classList.toggle('active_modal');
+		});
 	}
 }
 
