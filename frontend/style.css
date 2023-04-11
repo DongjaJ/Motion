@@ -147,6 +147,13 @@ header button {
 	height: 100%;
 
 	background-color: var(--translucent-black);
+	opacity: 0;
+	visibility: hidden;
+}
+
+.modal.active_modal {
+	opacity: 1;
+	visibility: visible;
 }
 
 .modal-body {
