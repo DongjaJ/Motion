@@ -147,8 +147,8 @@ h3 {
 	height: 100%;
 
 	background-color: var(--translucent-black);
-	/* opacity: 0;
-	visibility: hidden; */
+	opacity: 0;
+	visibility: hidden;
 }
 
 .modal.active_modal {
@@ -190,7 +190,7 @@ h3 {
 	justify-content: end;
 }
 
-.modal .cancel_btn {
+.modal .cancel-modal-btn {
 	width: 32px;
 	padding-top: 8px;
 	color: var(--accent-color);
