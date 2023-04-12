@@ -62,6 +62,7 @@ class TodoListImpl implements TodoList {
 		const todoListItems = this.$target.querySelector('.todo__list__items');
 		todoListItems?.insertAdjacentHTML('beforeend', contentTemplate);
 		this.modal.toggleModal();
+		this.modal.InitialModal();
 	}
 
 	makeItemTemplate({

@@ -20,6 +20,7 @@
 body {
 	margin: 0;
 	text-align: center;
+	background-image: url(assets/background_1d7e7d9e57.png);
 }
 
 button {
@@ -39,7 +40,7 @@ h3 {
 
 .todo__list {
 	height: 100vh;
-	background-image: url(assets/background_1d7e7d9e57.png);
+	/* background-image: url(assets/background_1d7e7d9e57.png); */
 	padding: 0 20px;
 	display: flex;
 	align-items: center;
@@ -75,7 +76,7 @@ h3 {
 
 .todo__list__items {
 	width: 55vw;
-	height: 80vh;
+	min-height: 80vh;
 	padding: 40px 0;
 	background-color: var(--bg-main-color);
 	display: flex;

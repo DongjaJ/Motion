@@ -12,11 +12,9 @@ class ModalImpl implements Modal {
 		this.$target.addEventListener('click', (e) => {
 			const $target = e.target as HTMLElement;
 			const cancelButton = $target?.closest('.cancel-modal-btn');
-			const addButton = $target.closest('.add-item-btn');
-			if (cancelButton) {
-				this.toggleModal();
-				return;
-			}
+			if (!cancelButton) return;
+			this.toggleModal();
+			this.InitialModal();
 		});
 	}
 	setContentType(contentType: ContentType): void {
@@ -25,6 +23,16 @@ class ModalImpl implements Modal {
 	}
 	get contentType() {
 		return this.$contentType;
+	}
+	InitialModal() {
+		const title = this.$target.querySelector(
+			`input[name="title"]`
+		) as HTMLInputElement;
+		const content = this.$target.querySelector(
+			'input[name="content"]'
+		) as HTMLInputElement;
+
+		title.value = content.value = '';
 	}
 	toggleModal() {
 		this.$target.classList.toggle('active_modal');
