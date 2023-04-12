@@ -12,7 +12,10 @@ class ModalImpl implements Modal {
 			const $target = e.target as HTMLElement;
 			const cancelButton = $target?.closest('.cancel-modal-btn');
 			const addButton = $target.closest('.add-item-btn');
-			if (cancelButton || addButton) this.toggleModal();
+			if (cancelButton) {
+				this.toggleModal();
+				return;
+			}
 		});
 	}
 	setContentType(contentType: string): void {

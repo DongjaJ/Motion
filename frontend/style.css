@@ -47,7 +47,7 @@ h3 {
 	border: var(--border-color) 1px solid;
 }
 
-.todo__list header {
+.todo__list .todo__list-header {
 	width: 55vw;
 	height: 20vh;
 	background-color: var(--black);
