@@ -1,9 +1,10 @@
 import { Modal } from './interface/interface';
+import { ContentType } from './main';
 
 class ModalImpl implements Modal {
 	constructor(
 		private $target: HTMLElement,
-		private $contentType: string = 'Image'
+		private $contentType?: ContentType
 	) {
 		this.setEvent();
 	}
@@ -18,10 +19,12 @@ class ModalImpl implements Modal {
 			}
 		});
 	}
-	setContentType(contentType: string): void {
+	setContentType(contentType: ContentType): void {
 		this.$contentType = contentType;
-		console.log(`modal type: ${this.$contentType}`);
 		this.setContent();
+	}
+	get contentType() {
+		return this.$contentType;
 	}
 	toggleModal() {
 		this.$target.classList.toggle('active_modal');
