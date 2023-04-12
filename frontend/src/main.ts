@@ -15,6 +15,7 @@ class TodoListImpl implements TodoList {
 		//버튼 클릭했을 때 모달창 activate
 		this.$target.addEventListener('click', (e) => {
 			this.modalAddEvent(e);
+			this.deleteItemEvent(e);
 			const target = e.target as HTMLElement;
 			const buttonContainer = target.closest('.button__container');
 			if (!(target instanceof HTMLButtonElement && buttonContainer))
@@ -47,6 +48,14 @@ class TodoListImpl implements TodoList {
 		const todoListItems = this.$target.querySelector('.todo__list__items');
 		todoListItems?.insertAdjacentHTML('beforeend', contentTemplate);
 		this.modal.toggleModal();
+	}
+
+	deleteItemEvent(e: Event) {
+		const target = e.target as HTMLElement;
+		const deleteButton = target.closest('.delete_button');
+		if (!deleteButton) return;
+		const item = deleteButton.closest('.todo__list__item');
+		item?.remove();
 	}
 }
 
