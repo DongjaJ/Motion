@@ -223,12 +223,15 @@ h3 {
 
 .dragging {
 	width: 50vw;
-	z-index: 100;
-	/* background-color: white; */
+	z-index: 5;
 	position: absolute;
+	/* visibility: hidden; */
 }
 
 .dragged {
 	opacity: 0.4;
-	/* outline: 1px solid dodgerblue; */
+}
+
+.afterDrag {
+	border: var(--accent-color) 1px solid;
 }

@@ -11,17 +11,25 @@ interface TodoList {
 
 export type ContentType = 'Image' | 'Video' | 'Note' | 'Memo';
 
+document.body.ondragstart = function () {
+	return false;
+};
+
 const checkDropable = (e: MouseEvent, copy_item: HTMLElement) => {
 	copy_item.hidden = true;
-	let elemBelow = document.elementFromPoint(e.clientX, e.clientY);
+	let elemBelow = document.elementFromPoint(
+		e.clientX,
+		e.clientY
+	) as HTMLElement;
 	copy_item.hidden = false;
 	if (!elemBelow) return;
+	console.log(elemBelow);
 	return elemBelow;
 };
 
 function getDragAfterElement(container: HTMLElement, y: number) {
 	const draggableElements = [
-		...container.querySelectorAll('.todolist-items'),
+		...container.querySelectorAll('.todo__list__item'),
 	];
 	const dragAfterElement: { offset: number; element?: HTMLElement } =
 		draggableElements.reduce(
@@ -36,6 +44,8 @@ function getDragAfterElement(container: HTMLElement, y: number) {
 			},
 			{ offset: Number.NEGATIVE_INFINITY }
 		);
+
+	console.log(dragAfterElement);
 
 	return dragAfterElement?.element;
 }
@@ -59,56 +69,6 @@ class TodoListImpl implements TodoList {
 			this.addEvent(e);
 		});
 
-		function dragStart() {
-			// copyItem.classList.toggle('dragging');
-			// todoList.append(copyItem);
-			// originItem.classList.toggle('dragged');
-		}
-
-		function excuteDrag(e: MouseEvent, todoList: HTMLElement) {
-			const target = e.target as HTMLElement;
-			const originItem = target.closest(
-				'.todo__list__item'
-			) as HTMLElement;
-			if (!originItem) return;
-
-			console.log('dragStart');
-			const { shiftX, shiftY } = getShift(e, originItem);
-			const copyItem = originItem.cloneNode(true) as HTMLElement;
-
-			copyItem.classList.toggle('dragging');
-			todoList.append(copyItem);
-			originItem.classList.toggle('dragged');
-
-			function moveAt(pageX: number, pageY: number) {
-				copyItem.style.left = pageX - shiftX + 'px';
-				copyItem.style.top = pageY - shiftY + 'px';
-			}
-
-			function onMouseMove(e: MouseEvent) {
-				moveAt(e.pageX, e.pageY);
-				const todolist = checkDropable(e, copyItem)?.closest(
-					'.todo__list__items'
-				);
-				if (!(todolist instanceof HTMLElement)) return;
-				const afterElement = getDragAfterElement(todolist, e.clientY);
-				if (afterElement === originItem) return;
-				// if (!afterElement) todolist.appendChild(originItem);
-				// todolist_ul.insertBefore(origin_item, afterElement);
-			}
-
-			function dragEndEvent() {
-				document.removeEventListener('mousemove', onMouseMove);
-				copyItem.remove();
-				originItem.classList.toggle('dragged');
-			}
-
-			//mouse 이동시 이벤트
-			document.onmousemove = onMouseMove;
-
-			document.onmouseup = dragEndEvent;
-		}
-
 		this.$target.addEventListener('mousedown', (e) => {
 			//drag start
 			const drag_delay = 150;
@@ -116,7 +76,7 @@ class TodoListImpl implements TodoList {
 			const timer = setTimeout(() => {
 				if (!isClick) return;
 				isClick = 0;
-				excuteDrag(e, this.$target);
+				this.excuteDrag(e, this.$target);
 			}, drag_delay);
 
 			document.onmouseup = () => {
@@ -124,6 +84,79 @@ class TodoListImpl implements TodoList {
 				isClick = 0;
 			};
 		});
+	}
+
+	dragStart() {
+		// copyItem.classList.toggle('dragging');
+		// todoList.append(copyItem);
+		// originItem.classList.toggle('dragged');
+	}
+
+	excuteDrag(e: MouseEvent, todoList: HTMLElement) {
+		let prevdragAfterElement: HTMLElement | null = null;
+		const target = e.target as HTMLElement;
+		const originItem = target.closest('.todo__list__item') as HTMLElement;
+		if (!originItem) return;
+
+		console.log('dragStart');
+		const { shiftX, shiftY } = getShift(e, originItem);
+		const copyItem = originItem.cloneNode(true) as HTMLElement;
+		let elemBelow = document
+			.elementFromPoint(e.clientX, e.clientY)
+			?.closest('.todo__list__items');
+		console.log(elemBelow);
+		copyItem.classList.toggle('dragging');
+		document.body.append(copyItem);
+		originItem.classList.toggle('dragged');
+
+		//mouse 이동시 이벤트
+		document.addEventListener('mousemove', onMouseMove);
+
+		document.onmouseup = dragEndEvent;
+
+		function moveAt(pageX: number, pageY: number) {
+			copyItem.style.left = pageX - shiftX + 'px';
+			copyItem.style.top = pageY - shiftY + 'px';
+		}
+
+		function onMouseMove(e: MouseEvent) {
+			moveAt(e.pageX, e.pageY);
+			const todolistItems = checkDropable(e, copyItem)?.closest(
+				'.todo__list__items'
+			) as HTMLElement;
+			if (!(todolist instanceof HTMLElement)) {
+				prevdragAfterElement?.classList.toggle('afterDrag');
+				prevdragAfterElement = null;
+				return;
+			}
+			const afterElement = getDragAfterElement(todolist, e.clientY);
+
+			if (!afterElement) {
+				prevdragAfterElement?.classList.toggle('afterDrag');
+				prevdragAfterElement = null;
+				return;
+			}
+			console.log(afterElement);
+			if (afterElement === prevdragAfterElement) return;
+			if (prevdragAfterElement)
+				prevdragAfterElement.classList.toggle('afterDrag');
+			afterElement?.classList.toggle('afterDrag');
+			prevdragAfterElement = afterElement;
+		}
+
+		function dragEndEvent() {
+			document.removeEventListener('mousemove', onMouseMove);
+			const todoListItems = todoList.querySelector(
+				'.todo__list__items'
+			) as HTMLElement;
+			if (prevdragAfterElement) {
+				prevdragAfterElement.classList.toggle('afterDrag');
+				todoListItems.insertBefore(originItem, prevdragAfterElement);
+			}
+
+			copyItem.remove();
+			originItem.classList.toggle('dragged');
+		}
 	}
 
 	addEvent(e: Event) {
