@@ -25,7 +25,7 @@ export function makeImageTemplate({
 	<div class="todo__list__item Image">
 		<div class="item_content">
 			<div class="content">
-				<img src="./assets/background_1d7e7d9e57.png" />
+				<img src="${content}" />
 			</div>
 			<div class="title">${title}</div>
 		</div>
@@ -41,7 +41,7 @@ export function makeVideoTemplate({
 	<div class="todo__list__item Video">
 		<div class="item_content">
 			<div class="content">
-				<video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+				<video src="${content}"
 								controls></video>
 			</div>
 			<div class="title">${title}</div>
