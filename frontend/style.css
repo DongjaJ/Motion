@@ -85,10 +85,11 @@ h3 {
 }
 
 .todo__list__item {
-	width: 80%;
+	width: 50vw;
 	height: 100px;
 	margin: 10px;
 	border: var(--border-color) 1px solid;
+	background: var(--component-bg-gradient);
 
 	display: flex;
 	align-items: center;
@@ -218,4 +219,16 @@ h3 {
 	font-size: 8px;
 	font-weight: bold;
 	padding: 4px 8px;
+}
+
+.dragging {
+	width: 50vw;
+	z-index: 100;
+	/* background-color: white; */
+	position: absolute;
+}
+
+.dragged {
+	opacity: 0.4;
+	/* outline: 1px solid dodgerblue; */
 }
