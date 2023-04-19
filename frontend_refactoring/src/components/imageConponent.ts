@@ -1,20 +1,18 @@
-export class ImageComponent {
-	private element: HTMLElement;
+import { BaseComponent } from './Component.js';
+
+export class ImageComponent extends BaseComponent<HTMLElement> {
 	constructor(
 		title: string = 'title',
 		url: string = 'https://newsimg.sedaily.com/2022/12/16/26EXCQU873_1.jpg'
 	) {
-		const template = document.createElement('template');
-
-		template.innerHTML = `
+		super(`
 		<section class ='image'>
 				<div class ='image__holder'>
 					<img class ='image__thumbnail'>
 				</div>
 				<p class ='image__title'></p>
 			</section>
-		`;
-		this.element = template.content.firstElementChild! as HTMLElement;
+		`);
 
 		const imageElement = this.element.querySelector(
 			'.image__thumbnail'
@@ -26,9 +24,5 @@ export class ImageComponent {
 			'.image__title'
 		)! as HTMLParagraphElement;
 		titleElement.textContent = title;
-	}
-
-	attachTo(parent: HTMLElement, position: InsertPosition = 'afterbegin') {
-		parent.insertAdjacentElement(position, this.element);
 	}
 }
