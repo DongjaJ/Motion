@@ -1,4 +1,4 @@
-import { BaseComponent } from './Component.js';
+import { BaseComponent } from '../Component.js';
 
 export class PageComponent extends BaseComponent<HTMLUListElement> {
 	constructor() {
