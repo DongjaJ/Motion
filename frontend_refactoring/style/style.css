@@ -111,3 +111,8 @@ body {
 	border-top: 1px solid var(--border-color);
 	text-align: center;
 }
+
+.close {
+	background-color: var(--smokywhite);
+	color: var(--black);
+}
