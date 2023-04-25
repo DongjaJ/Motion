@@ -5,9 +5,18 @@ export interface Composible {
 }
 
 type OnCloseListener = () => void;
+
+interface SectionContainer extends Component, Composible {
+	setOnCloseListener(listener: OnCloseListener): void;
+}
+
+type SectionContainerConstructor = {
+	new (): SectionContainer;
+};
+
 export class PageItemComponent
 	extends BaseComponent<HTMLElement>
-	implements Composible
+	implements SectionContainer
 {
 	private closeListener?: OnCloseListener;
 	constructor() {
@@ -41,12 +50,12 @@ export class PageComponent
 	extends BaseComponent<HTMLUListElement>
 	implements Composible
 {
-	constructor() {
+	constructor(private pageItemConstructor: SectionContainerConstructor) {
 		super(`<ul class="page"></ul>`);
 	}
 
 	addChild(section: Component) {
-		const item = new PageItemComponent();
+		const item = new this.pageItemConstructor();
 		item.addChild(section);
 		item.attachTo(this.element, 'beforeend');
 		item.setOnCloseListener(() => {
