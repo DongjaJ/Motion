@@ -4,9 +4,9 @@ export interface Composible {
 	addChild(child: Component): void;
 }
 
-type OnCloseListener = () => void;
+export type OnCloseListener = () => void;
 
-interface SectionContainer extends Component, Composible {
+export interface SectionContainer extends Component, Composible {
 	setOnCloseListener(listener: OnCloseListener): void;
 }
 
