@@ -122,21 +122,17 @@ export class PageComponent
 		});
 		this.element.addEventListener('drop', (e: DragEvent) => {
 			this.onDrop(e);
-			console.log('drop');
 		});
 	}
 
 	onDragOver(event: DragEvent) {
 		event.preventDefault();
-		console.log('onDragOver');
 	}
 
 	onDrop(e: DragEvent) {
 		e.preventDefault();
-		console.log('droped');
 		if (!this.dropTarget) return;
 		if (this.dragTarget && this.dragTarget !== this.dropTarget) {
-			console.log('dropped');
 			const dropY = e.clientY;
 			const srcElement = this.dragTarget.getBoundingRect();
 
