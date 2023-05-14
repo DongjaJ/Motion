@@ -6,6 +6,7 @@
 
 배운 것
 - typescript의 장점인 type과 interface를 사용해 객체지향적 프로그래밍
+- 제네릭 사용
 - 생성자를 이용한 의존성 주입
 - draggable api
 
