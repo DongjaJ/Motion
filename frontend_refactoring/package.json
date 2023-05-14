@@ -1,8 +1,15 @@
 {
-	"dependencies": {
+	"name": "frontend_refactoring",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"devDependencies": {
 		"typescript": "^5.0.4"
 	},
 	"scripts": {
-		"build": "tsc"
-	}
+		"build": "rm -fr dist/* && tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC"
 }
