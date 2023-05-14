@@ -1,6 +1,9 @@
 # Motion
 📔 이미지, 동영상, 메모, 투두리스트를 추가, 삭제할 수 있는 메모장
 
+링크
+https://moonlit-liger-76e4d3.netlify.app
+
 ## 사용 기술
 <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/TypeScript-3178C6.svg?&style=for-the-badge&logo=TypeScript&logoColor=white">
 
